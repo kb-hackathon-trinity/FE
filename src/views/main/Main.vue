@@ -17,8 +17,15 @@ const accountInfo = {
     <div class="container-fluid">
 
         <div class="account-card">
-            <div class="account-image">
-                <img src="@/assets/img/kblogo.svg">
+            <div class="account-header">
+                <div class="account-image">
+                    <img src="@/assets/img/kblogo.svg">
+                </div>
+                <div class="notification-icon" @click="$router.push('/notification')">
+                    <span class="btn-noti material-symbols-outlined">
+                        notifications
+                    </span>
+                </div>
             </div>
             <div class="account-number">
                 <p>{{ accountInfo.accountNumber }}</p>
@@ -47,6 +54,14 @@ const accountInfo = {
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
+    position: relative;
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .account-image {
@@ -59,20 +74,19 @@ const accountInfo = {
     object-fit: cover;
 }
 
-.account-number,
-.account-balance {
+.account-number {
     margin-bottom: 10px;
 }
 
 .account-number p,
 .account-balance p {
-    font-size: 1.0em;
+    font-size: 0.9em;
     color: #333;
     margin: 0;
 }
 
 .account-balance p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
@@ -97,4 +111,23 @@ h3 {
     margin-top: 0;
     color: #333;
 }
+
+.notification-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.notification-icon span {
+    font-size: 1.3em;
+    color: #666;
+}
+
+.btn-noti:hover {
+    background-color: #8a8a8a;
+    color: #fff;
+    border-radius: 50%;
+}
+
 </style>

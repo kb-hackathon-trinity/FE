@@ -1,28 +1,63 @@
 <script setup>
-defineProps({
+import { ref, onMounted, computed } from "vue";
+
+// Props 명시적으로 정의
+const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   amount: {
     type: Number,
-    required: true
+    required: true,
   },
   balance: {
     type: Number,
-    required: true
+    required: true,
   },
   modeNo: {
     type: Number,
-    required: true
+    required: true,
+  },
+});
+
+// Progress bar width 상태
+const progressWidth = ref(0);
+
+// 달성률 계산
+const getAchievementRate = computed(() => {
+  return Math.round((props.balance / props.amount) * 100); // props로 접근
+});
+
+// 동적으로 CSS 클래스 결정
+const rateClass = computed(() => {
+  if (getAchievementRate.value > 70) {
+    return "gold";
+  } else if (getAchievementRate.value > 30) {
+    return "wh";
+  } else {
+    return "bronze";
   }
 });
 
-const getModeText = (modeNo) => modeNo === 1 ? 'EASY' : 'HARD';
+// EASY / HARD 모드 텍스트 반환
+const getModeText = (modeNo) => (modeNo === 1 ? "EASY" : "HARD");
 
-const getAchievementRate = (balance, amount) => {
-  return Math.round((balance / amount) * 100);
-};
+// Mounted 시 애니메이션 실행
+onMounted(() => {
+  let currentWidth = 0;
+  const targetWidth = getAchievementRate.value;
+
+  const interval = setInterval(() => {
+    if (currentWidth >= targetWidth) {
+      progressWidth.value = targetWidth;
+      clearInterval(interval);
+    } else {
+      currentWidth += 1; // 증가 속도 조절 가능
+      progressWidth.value = currentWidth;
+    }
+  }, 10); // 속도 조정 가능
+});
 </script>
 
 <template>
@@ -34,19 +69,15 @@ const getAchievementRate = (balance, amount) => {
           {{ getModeText(modeNo) }}
         </span>
       </div>
-      <div class="amount">
-        {{ amount.toLocaleString() }}원
-      </div>
+      <div class="amount">{{ amount.toLocaleString() }}원</div>
     </div>
     <div class="progress-section">
-      <div class="achievement">
-        달성률 {{ getAchievementRate(balance, amount) }}%
-      </div>
+      <div class="achievement">달성률 {{ progressWidth }}%</div>
       <div class="progress-container">
-        <div 
-          class="progress-bar" 
-          :style="{ width: `${getAchievementRate(balance, amount)}%` }"
-          :class="modeNo === 1 ? 'easy' : 'hard'"
+        <div
+          class="progress-bar"
+          :style="{ width: `${progressWidth}%` }"
+          :class="rateClass"
         ></div>
       </div>
     </div>
@@ -114,14 +145,18 @@ const getAchievementRate = (balance, amount) => {
 
 .progress-bar {
   height: 100%;
-  transition: width 0.3s ease;
+  transition: width 0.1s ease; /* 부드러운 전환 */
 }
 
-.progress-bar.easy {
-  background-color: #0066cc;
+.progress-bar.bronze {
+  background-color: #cd7f32;
 }
 
-.progress-bar.hard {
-  background-color: #cc0000;
+.progress-bar.wh {
+  background-color: silver;
+}
+
+.progress-bar.gold {
+  background-color: #ffd700;
 }
 </style>

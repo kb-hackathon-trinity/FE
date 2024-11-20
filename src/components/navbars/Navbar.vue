@@ -25,9 +25,9 @@ function toggleDropdown() {
             </button>
             
             <div v-if="showDropdown" class="dropdown-menu">
-                <button class="dropdown-item">일반 저금통</button>
+                <router-link to="/kbox/create" class="dropdown-item">일반 저금통</router-link>
                 <hr />
-                <button class="dropdown-item">모임 저금통</button>
+                <router-link to="/kbox/group/create" class="dropdown-item">모임 저금통</router-link>
             </div>
         </div>
 
@@ -49,7 +49,7 @@ function toggleDropdown() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem;
+    padding: 0.5rem;
     background-color: #ffffff;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -73,11 +73,11 @@ function toggleDropdown() {
 }
 
 .nav-button {
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 0.8rem;
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .nav-button:hover {
@@ -118,12 +118,12 @@ function toggleDropdown() {
 }
 
 .dropdown-item {
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 0.8rem;
     background: none;
     border: none;
     text-align: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .dropdown-item:hover {
