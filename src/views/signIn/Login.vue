@@ -12,7 +12,7 @@ const handlelogin = () => {
 
 <template>
   <div class="login-container">
-    <h2>로그인</h2>
+    <h2 class="login-title">로그인</h2>
     <div class="login-form">
       <div class="input-group">
         <input 
@@ -38,9 +38,12 @@ const handlelogin = () => {
 
 <style scoped>
 .login-container {
+  width: 90%;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 20px auto;
+  padding: 1.5rem;
+  border: 4px solid #EAEAEA;
+  border-radius: 15px;
 }
 
 .login-form {
@@ -54,15 +57,46 @@ const handlelogin = () => {
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 16px;
 }
 
 .button-group {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
 }
 
 button {
   flex: 1;
+  padding: 0.8rem;
+  font-size: 16px;
+  border-style: none;
+  border-radius: 20px;
 }
+
+.login-btn {
+  background-color: #FFCE0B;
+}
+
+.signup-btn {
+  background-color: #E8E8E8;
+}
+
+.login-title {
+  margin-bottom: 2rem;
+}
+
+input {
+  border: none !important;
+  border-bottom: 1px solid !important;
+  border-radius: 0 !important;
+  text-align: center;
+  outline: none;
+}
+
+input:focus::placeholder {
+  color:transparent;
+}
+
 </style>
