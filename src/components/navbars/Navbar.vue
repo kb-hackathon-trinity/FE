@@ -23,10 +23,11 @@ function toggleDropdown() {
                     add_circle
                 </span>
             </button>
-            <!-- Dropdown menu -->
+            
             <div v-if="showDropdown" class="dropdown-menu">
-                <button class="dropdown-item">Menu 1</button>
-                <button class="dropdown-item">Menu 2</button>
+                <button class="dropdown-item">일반 저금통</button>
+                <hr />
+                <button class="dropdown-item">모임 저금통</button>
             </div>
         </div>
 
@@ -89,10 +90,9 @@ function toggleDropdown() {
     border-radius: 50%;
 }
 
-/* Dropdown menu styling */
 .dropdown-menu {
     position: absolute;
-    bottom: 100%; /* Position above the button */
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -100,8 +100,21 @@ function toggleDropdown() {
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
-    overflow: hidden;
+    overflow: visible;
     z-index: 10;
+    margin-bottom: 10px; /* 삼각형을 위한 여백 추가 */
+}
+
+.dropdown-menu::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #ffffff;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
 }
 
 .dropdown-item {
@@ -115,5 +128,9 @@ function toggleDropdown() {
 
 .dropdown-item:hover {
     background-color: #f0f0f0;
+}
+
+hr {
+    margin: 0.5rem 0 !important;
 }
 </style>
